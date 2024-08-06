@@ -21,6 +21,11 @@ import PestDetailsScreen from './Screens/PestDetailsScreen.js';
 import SelectedPlansScreen from './Screens/SelectedPlansScreen.js';
 import ProgressDetailsScreen from './Screens/ProgressDetailsScreen.js';
 import ExpenseCalculator from './Screens/ExpenseCalculator.js';
+import LoginScreen from './Screens/LoginScreen.js';
+import RegisterScreen from './Screens/RegisterScreen.js';
+import MainScreenDrawer from './Screens/AboutScreens/MainScreenDrawer.js';
+import MainScreen from './Screens/AboutScreens/MainScreen.js';
+import LogoutScreen from './Screens/LogoutScreen.js';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -56,6 +61,7 @@ const MyDrawer = () => (
         drawerIcon: ({ color, size }) => <Icon name='home' color={color} size={size} />,
       }}
     />
+    
   <Drawer.Screen
     name="Crops"
     component={AllCropsScreen}
@@ -101,6 +107,16 @@ const MyDrawer = () => (
       drawerIcon: ({ color, size }) =>( <Icon name='assignment' color={color} size={size} /> ),
     }}
   />
+  <Drawer.Screen name="Main" component={MainScreen} options={{
+              title: 'About Farm IQ',
+      drawerIcon: ({ color, size }) =>( <Icon name='info' color={color} size={size} /> ),
+            }}
+            />
+            <Drawer.Screen name="Logout" component={LogoutScreen} options={{
+              title: 'Logout',
+      drawerIcon: ({ color, size }) =>( <Icon name='logout' color={color} size={size} /> ),
+            }}
+            />
 </Drawer.Navigator>
 );
 
@@ -115,6 +131,13 @@ const App = () => (
             headerTintColor: 'white',
             contentStyle: { backgroundColor: '#fff' },
           }} >
+           
+          <Stack.Screen name="Login" component={LoginScreen} options={{
+              headerShown: false,
+            }}/>
+            <Stack.Screen name="Register" component={RegisterScreen} options={{
+              headerShown: false,
+            }}/>
            <Stack.Screen
             name="Drawer"
             component={MyDrawer}
@@ -122,6 +145,9 @@ const App = () => (
               headerShown: false,
             }}
           />
+           <Stack.Screen name="Main" component={MainScreenDrawer} options={{
+              headerShown: false,
+            }}/>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="AllCrops" component={AllCropsScreen} options={{
               title: 'All Crops Overview',
