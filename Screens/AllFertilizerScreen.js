@@ -14,7 +14,7 @@ const AllFertilizerScreen = ({ navigation }) => {
  
    const fetchingFertilizers = async () => {
      try {
-       const response = await fetch('http://192.168.1.2:5000/api/fertilizers');
+       const response = await fetch('http://192.168.1.7:5000/api/fertilizers');
        const responseData = await response.json();
        setData(responseData.fertilizers);
      } catch (error) {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 function ExpenseCalculator() {
-  const navigation = useNavigation();
+  const scrollViewRef = useRef(null);
+  const resultsRef = useRef(null);
   const [labourCost, setLabourCost] = useState('');
   const [fertilizerCost, setFertilizerCost] = useState('');
   const [pestCost, setPestCost] = useState('');
@@ -12,9 +12,38 @@ function ExpenseCalculator() {
   const [travelExpenses, setTravelExpenses] = useState('');
   const [landCost, setLandCost] = useState('');
   const [totalEarned, setTotalEarned] = useState('');
+  const [totalExpenses, setTotalExpenses] = useState(null);
+  const [profit, setProfit] = useState(null);
+
+  const handleCalculate = () => {
+    const labour = parseFloat(labourCost) || 0;
+    const fertilizer = parseFloat(fertilizerCost) || 0;
+    const pest = parseFloat(pestCost) || 0;
+    const seed = parseFloat(seedCost) || 0;
+    const electricity = parseFloat(electricityCost) || 0;
+    const travel = parseFloat(travelExpenses) || 0;
+    const land = parseFloat(landCost) || 0;
+    const earned = parseFloat(totalEarned) || 0;
+
+    const total = labour + fertilizer + pest + seed + electricity + travel + land;
+    const profit = earned - total;
+
+    setTotalExpenses(total);
+    setProfit(profit);
+
+    // Scroll to the results section
+    if (scrollViewRef.current && resultsRef.current) {
+      resultsRef.current.measureLayout(
+        scrollViewRef.current.getScrollResponder().getScrollableNode(),
+        (x, y) => {
+          scrollViewRef.current.scrollTo({ y: y, animated: true });
+        }
+      );
+    }
+  };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
       <Text style={styles.heading}>Expense Calculator</Text>
 
       <View style={styles.form}>
@@ -90,9 +119,19 @@ function ExpenseCalculator() {
           onChangeText={setTotalEarned}
         />
 
-        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.submitButton}>
-          <Text style={styles.submitButtonText}>Submit</Text>
+        <TouchableOpacity onPress={handleCalculate} style={styles.submitButton}>
+          <Text style={styles.submitButtonText}>Calculate</Text>
         </TouchableOpacity>
+
+        <View ref={resultsRef} style={styles.results}>
+          {totalExpenses !== null && (
+            <>
+              <Text style={styles.resultText}>Total Expenses: {totalExpenses.toFixed(2)}</Text>
+              <Text style={styles.resultText}>Total Earned: {totalEarned}</Text>
+              <Text style={styles.resultText}>Total Profit: {profit.toFixed(2)}</Text>
+            </>
+          )}
+        </View>
       </View>
     </ScrollView>
   );
@@ -139,6 +178,20 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: '#fff',
     fontSize: 16,
+  },
+  results: {
+    marginTop: 20,
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: '#66FF66',
+    width: '100%',
+    maxWidth: 400,
+    alignItems: 'center',
+  },
+  resultText: {
+    fontSize: 18,
+    marginBottom: 10,
+    color: '#444',
   },
 });
 

@@ -7,7 +7,8 @@ import cropRoute from "./routes/cropRoute.js";
 import seedRoute from "./routes/seedRoute.js"
 import fertilizerRoute from "./routes/fertilizerRoute.js";
 import pestRoute from "./routes/pestRoute.js";
-import  userRoute from './routes/userRoute.js';
+import userRoute from './routes/userRoute.js';
+import planRoute from './routes/planRoute.js';
 import uploadRoute from './routes/uploadRoutes.js';
 import connectDB from "./config/db.js";
 const port = process.env.PORT || 5000;
@@ -36,6 +37,7 @@ app.use("/api/users", userRoute);
 app.use("/api/fertilizers", fertilizerRoute);
 app.use("/api/pests", pestRoute);
 app.use("/api/seeds", seedRoute);
+app.use("/api/plans", planRoute);
 app.use("/api/upload", uploadRoute);
 
 if (process.env.NODE_ENV === 'production') {

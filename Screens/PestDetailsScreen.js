@@ -14,7 +14,7 @@ const PestDetailsScreen = ({ route }) => {
 
   const fetchingPestDetails = async () => {
     try {
-      const response = await fetch(`http://192.168.1.2:5000/api/pests/${pestId}`);
+      const response = await fetch(`http://192.168.1.7:5000/api/pests/${pestId}`);
       const responseData = await response.json();
       setData(responseData); // Assuming 'pest' is the key in your API response
     } catch (error) {

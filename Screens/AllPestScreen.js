@@ -14,7 +14,7 @@ const AllPestScreen = ({navigation}) => {
 
    const fetchingPests = async () => {
      try {
-       const response = await fetch('http://192.168.1.2:5000/api/pests');
+       const response = await fetch('http://192.168.1.7:5000/api/pests');
        const responseData = await response.json();
        setData(responseData.pests);
      } catch (error) {

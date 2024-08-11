@@ -13,19 +13,20 @@ import CropDetails from './Screens/CropDetails';
 import FertilizerDetailsScreen from './Screens/FertilizerDetailsScreen';
 import AllFertilizerScreen from './Screens/AllFertilizerScreen.js';
 import AllPestScreen from './Screens/AllPestScreen.js';
-import SelectPlanScreen from './Screens/SelectPlanScreen.js';
+import SelectPlanScreen from './Screens/Plans/SelectPlanScreen.js';
 import SeedDetails from './Screens/SeedDetails.js';
 import WeatherScreen from './Screens/WeatherScreen.js';
 import FarmIQTabs from './Components/FarmIQTabs.js';
 import PestDetailsScreen from './Screens/PestDetailsScreen.js';
-import SelectedPlansScreen from './Screens/SelectedPlansScreen.js';
-import ProgressDetailsScreen from './Screens/ProgressDetailsScreen.js';
-import ExpenseCalculator from './Screens/ExpenseCalculator.js';
-import LoginScreen from './Screens/LoginScreen.js';
-import RegisterScreen from './Screens/RegisterScreen.js';
+import SelectedPlansScreen from './Screens/Plans/SelectedPlansScreen.js';
+import ProgressDetailsScreen from './Screens/Plans/ProgressDetailsScreen.js';
+import ExpenseCalculator from './Screens/Plans/ExpenseCalculator.js';
+import LoginScreen from './Screens/LogScreens/LoginScreen.js';
+import RegisterScreen from './Screens/LogScreens/RegisterScreen.js';
 import MainScreenDrawer from './Screens/AboutScreens/MainScreenDrawer.js';
 import MainScreen from './Screens/AboutScreens/MainScreen.js';
-import LogoutScreen from './Screens/LogoutScreen.js';
+import LogoutScreen from './Screens/LogScreens/LogoutScreen.js';
+import StartingPage from './Screens/LogScreens/StartingPage.js';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -131,7 +132,9 @@ const App = () => (
             headerTintColor: 'white',
             contentStyle: { backgroundColor: '#fff' },
           }} >
-           
+           <Stack.Screen name="Start" component={StartingPage} options={{
+              headerShown: false,
+            }}/>
           <Stack.Screen name="Login" component={LoginScreen} options={{
               headerShown: false,
             }}/>
@@ -182,6 +185,7 @@ const App = () => (
         <Stack.Screen name="ExpenseCalculator" component={ExpenseCalculator} options={{
               title: 'ExpenseCalculator ',
             }}/>
+            
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>

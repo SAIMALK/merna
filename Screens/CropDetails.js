@@ -14,7 +14,7 @@ function CropDetails({ route }) {
 
   const fetchingCropDetails = async () => {
     try {
-      const response = await fetch(`http://192.168.1.2:5000/api/crops/${cropId}`);
+      const response = await fetch(`http://192.168.1.7:5000/api/crops/${cropId}`);
       const responseData = await response.json();
       setData(responseData);
     } catch (error) {
@@ -52,7 +52,7 @@ function Start({ data }) {
       <Image source={{ uri: data.img }} style={styles.image} />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SelectPlan')}
+        onPress={() =>{ console.log(data._id); navigation.navigate('SelectPlan', { cropId: data._id })}}
       >
         <Text style={styles.buttonText}>Select Plan</Text>
       </TouchableOpacity>

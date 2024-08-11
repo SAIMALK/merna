@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Button, Alert,StyleSheet,TouchableOpacity,Text } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useLogoutMutation } from '../slices/usersApiSlice'; // adjust the import path as needed
-import { logout } from '../slices/authSlice'; // adjust the import path as needed
+import { useLogoutMutation } from '../../slices/usersApiSlice'; // adjust the import path as needed
+import { logout } from '../../slices/authSlice'; // adjust the import path as needed
 
 const LogoutScreen = ({ navigation }) => {
   const dispatch = useDispatch();

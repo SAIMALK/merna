@@ -18,7 +18,7 @@ const pages = [
   { component: Step2_1 },
   { component: Step3 },
   { component: Step4 },
-  { component: Last },
+  // { component: Last },
 ];
 
 const MainScreen = ({ navigation }) => {

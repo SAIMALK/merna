@@ -13,7 +13,7 @@ const AllCropScreen = () => {
 
   const fetchingCrops = async () => {
     try {
-      const response = await fetch('http://192.168.1.2:5000/api/crops');
+      const response = await fetch('http://192.168.1.7:5000/api/crops');
       const responseData = await response.json();
       setData(responseData.crops);
     } catch (error) {

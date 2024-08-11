@@ -14,7 +14,7 @@ const FertilizerDetailsScreen = ({ route }) => {
 
   const fetchingFertilizerDetails = async () => {
     try {
-      const response = await fetch(`http://192.168.1.2:5000/api/fertilizers/${fertilizerId}`);
+      const response = await fetch(`http://192.168.1.7:5000/api/fertilizers/${fertilizerId}`);
       const responseData = await response.json();
       setData(responseData); // Assuming 'fertilizer' is the key in your API response
     } catch (error) {
