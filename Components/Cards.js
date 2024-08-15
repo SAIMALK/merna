@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { ADDRESS } from '../constants';
 
 const Card = () => {
   const navigation = useNavigation();
@@ -13,7 +14,7 @@ const Card = () => {
 
   const fetchCrops = async () => {
     try {
-      const response = await fetch('http://192.168.1.7:5000/api/crops'); // Adjust API URL as needed
+      const response = await fetch(`${ADDRESS}/api/crops`); // Adjust API URL as needed
       const responseData = await response.json();
       // Sort crops by a date field or use an API that returns the most recent ones
       const recentCrops = responseData.crops.slice(0, 4); // Assuming `crops` is the key and contains an array

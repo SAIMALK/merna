@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { ADDRESS } from '../constants';
 
 const SeedDetails = ({ route }) => {
   const { seedId } = route.params;
@@ -14,7 +15,7 @@ const SeedDetails = ({ route }) => {
 
   const fetchingSeedDetails = async () => {
     try {
-      const response = await fetch(`http://192.168.1.7:5000/api/seeds/${seedId}`);
+      const response = await fetch(`${ADDRESS}/api/seeds/${seedId}`);
       const responseData = await response.json();
       setData(responseData); // Assuming 'seed' is the key in your API response
     } catch (error) {
@@ -61,7 +62,7 @@ const SprayItems = ({ sprayItem }) => {
   return (
     <View style={styles.itemContainer}>
     <Text style={styles.normalText}>
-      <Text style={styles.bold}>Spray Name:</Text> {sprayItem.name}</Text>
+      <Text style={styles.bold}>Seed Name:</Text> {sprayItem.name}</Text>
       <Text style={styles.normalText}>
       <Text style={styles.bold}>Type:</Text> {sprayItem.type}</Text>
         <Text style={styles.normalText}>

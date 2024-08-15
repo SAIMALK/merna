@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { format, addDays, addMonths, isValid } from 'date-fns';
+import { ADDRESS } from '../../constants';
 
 function ProgressDetailsScreen() {
   const [planDetails, setPlanDetails] = useState(null);
@@ -13,7 +14,7 @@ function ProgressDetailsScreen() {
   useEffect(() => {
     const fetchPlanDetails = async () => {
       try {
-        const response = await fetch(`http://192.168.1.7:5000/api/plans/${planId}`);
+        const response = await fetch(`${ADDRESS}/api/plans/${planId}`);
        
         if (!response.ok) {
           throw new Error('Failed to fetch plan details');

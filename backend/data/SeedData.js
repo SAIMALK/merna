@@ -120,7 +120,7 @@ const SeedsData = [
   },
   {
     _id: generateObjectId("s14"),
-    img: "https://images.unsplash.com/photo-1576169490741-78a0ae37efb2?w=500&auto=format&fit=crop&q=60",
+    img: "https://plus.unsplash.com/premium_photo-1675864033264-cb9db758422d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2hpbGklMjBwZXBwZXIlMjBzZWVkfGVufDB8fDB8fHww",
     name: "Hybrid Chili Pepper",
     type: ["Chili Pepper Seed"],
     description: "Spicy and high-yield chili pepper seeds.",

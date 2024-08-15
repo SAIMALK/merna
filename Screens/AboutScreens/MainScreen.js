@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import Step1 from './Step1';
-import InstructionsPage from './InstructionsPage';
+import WithoutSkip from './WithoutSkip';
 import Step1_1 from './Step1_1';
 import Step2 from './Step2';
 import Step2_1 from './Step2_1';
@@ -11,7 +11,7 @@ import Step4 from './Step4';
 import Last from './Last';
 
 const pages = [
-  { component: InstructionsPage },
+  { component: WithoutSkip },
   { component: Step1 },
   { component: Step1_1 },
   { component: Step2 },

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import CommentSection from '../Components/CommentSection';
+import { ADDRESS } from '../constants';
 
 function CropDetails({ route }) {
   const { cropId } = route.params;
@@ -14,7 +16,7 @@ function CropDetails({ route }) {
 
   const fetchingCropDetails = async () => {
     try {
-      const response = await fetch(`http://192.168.1.7:5000/api/crops/${cropId}`);
+      const response = await fetch(`${ADDRESS}/api/crops/${cropId}`);
       const responseData = await response.json();
       setData(responseData);
     } catch (error) {
@@ -33,14 +35,21 @@ function CropDetails({ route }) {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Start data={data} />
-      <Details crop={data} />
-      <Seed seeds={data.seeds} />
-      <Fertilizer fertilizers={data.fertilizers} />
-      <Pests pests={data.pests} />
-      <CommentSection />
-    </ScrollView>
+    <FlatList
+      data={[]}
+      ListHeaderComponent={
+        <View style={styles.container}>
+          <Start data={data} />
+          <Details crop={data} />
+          <Seed seeds={data.seeds} />
+          <Fertilizer fertilizers={data.fertilizers} />
+          <Pests pests={data.pests} />
+          <CommentSection cropId={cropId} />
+        </View>
+      }
+      keyExtractor={() => "dummy-key"}
+      renderItem={null}
+    />
   );
 }
 
@@ -136,19 +145,6 @@ function Pests({ pests }) {
           <Text style={styles.item}>➤  {pest.name}</Text>
         </TouchableOpacity>
       ))}
-    </View>
-  );
-}
-
-function CommentSection() {
-  return (
-    <View style={styles.commentSectionContainer}>
-      <Text style={styles.header}>Comments Section</Text>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Type your message here..."
-        multiline
-      />
     </View>
   );
 }

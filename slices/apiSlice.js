@@ -16,6 +16,6 @@ console.log(BASE_URL)
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithAuth, // Use the customized baseQuery
-    tagTypes: ['Story', 'User'],
+    tagTypes: ['Crop', 'User'],
     endpoints: (builder) => ({}),
 });

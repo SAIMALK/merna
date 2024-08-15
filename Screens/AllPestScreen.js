@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet,Text, Image,TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { ADDRESS } from '../constants';
 
 const AllPestScreen = ({navigation}) => {
   const [data, setData] = useState([]);
@@ -14,7 +15,7 @@ const AllPestScreen = ({navigation}) => {
 
    const fetchingPests = async () => {
      try {
-       const response = await fetch('http://192.168.1.7:5000/api/pests');
+       const response = await fetch(`${ADDRESS}/api/pests`);
        const responseData = await response.json();
        setData(responseData.pests);
      } catch (error) {

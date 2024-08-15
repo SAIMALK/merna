@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { ADDRESS } from '../../constants';
 
 function SelectPlanScreen({ route }) {
   const navigation = useNavigation();
@@ -76,7 +77,7 @@ function SelectPlanScreen({ route }) {
     }
 
     try {
-      const response = await fetch('http://192.168.1.7:5000/api/plans', {
+      const response = await fetch(`${ADDRESS}/api/plans`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

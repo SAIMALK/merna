@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { ADDRESS } from '../constants';
 const AllCropScreen = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ const AllCropScreen = () => {
 
   const fetchingCrops = async () => {
     try {
-      const response = await fetch('http://192.168.1.7:5000/api/crops');
+      const response = await fetch(`${ADDRESS}/api/crops`);
       const responseData = await response.json();
       setData(responseData.crops);
     } catch (error) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet,Text } from 'react-native';
 import CropItem from './CropItem';
+import { ADDRESS } from '../constants';
 
 const PlantationGrid = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -14,7 +15,7 @@ const PlantationGrid = ({ navigation }) => {
 
   const fetchingstories = async () => {
     try {
-      const response = await fetch('http://192.168.1.7:5000/api/crops');
+      const response = await fetch(`${ADDRESS}/api/crops`);
       const responseData = await response.json();
       setData(responseData.crops);
        // Access 'crops' property

@@ -1,6 +1,6 @@
 // ReportsPage.js
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Text, StyleSheet, ScrollView } from 'react-native';
 
 const Last = () => (
   <ScrollView contentContainerStyle={styles.page}>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginTop: 80, // Adjust this value as needed
+    marginTop: 10, // Adjust this value as needed
 
     fontWeight: 'bold',
     marginBottom: 20,

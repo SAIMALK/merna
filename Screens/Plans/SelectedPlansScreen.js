@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Button, StyleSheet, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { ADDRESS } from '../../constants';
 
 function SelectedPlansScreen() {
   const [plans, setPlans] = useState([]);
@@ -11,7 +12,7 @@ function SelectedPlansScreen() {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await fetch('http://192.168.1.7:5000/api/plans'); // Replace with your API endpoint
+        const response = await fetch(`${ADDRESS}/api/plans`); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error('Failed to fetch plans');
         }

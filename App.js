@@ -108,6 +108,7 @@ const MyDrawer = () => (
       drawerIcon: ({ color, size }) =>( <Icon name='assignment' color={color} size={size} /> ),
     }}
   />
+  
   <Drawer.Screen name="Main" component={MainScreen} options={{
               title: 'About Farm IQ',
       drawerIcon: ({ color, size }) =>( <Icon name='info' color={color} size={size} /> ),

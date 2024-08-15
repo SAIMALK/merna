@@ -28,9 +28,10 @@ const getCrops = asyncHandler(async (req, res) => {
 const getCropById = asyncHandler(async (req, res) => {
   try {
     const crop = await Crop.findById(req.params.id)
-      .populate('seeds')         // Populate the seeds field with the Seed documents
-      .populate('fertilizers')   // Populate the fertilizers field with the Fertilizer documents
-      .populate('pests');        // Populate the pests field with the Pest documents
+      .populate('seeds')         
+      .populate('fertilizers')   
+      .populate('pests')        
+      .populate('reviews.user', 'name'); 
 
     if (crop) {
       res.json(crop);
@@ -63,24 +64,34 @@ const getCropBySeedId = asyncHandler(async (req, res) => {
 // @route   POST /api/crops
 // @access  Private/Admin
 const createCrop = asyncHandler(async (req, res) => {
-  const crop = new Crop({
-    title: "Sample Title",
-    type: "Novel",
-    genre: ["Fantasy"],
-    user: req.user._id,
-    cover: "/images/sample.jpg",
-    status: "Sample Status",
-    plot: "Sample Plot",
-    chapters: 0,
-    author: generateObjectId("1"),
-    date: "Mar 22, 2024",
-    numReviews: 0,
-    rating: 5,
-    rank: "1",
-  });
+  try {
+    const { name, description, season, durationInMonths, img, durationPeriod, avgProfit, fertilizers, seeds, pests } = req.body;
 
-  const createdCrop = await crop.save();
-  res.status(201).json(createdCrop);
+    if (!name || !description || !season || !durationInMonths || !img || !durationPeriod || !avgProfit || !fertilizers || !seeds || !pests) {
+      res.status(400);
+      throw new Error("All fields are required");
+    }
+
+    const crop = new Crop({
+      name,
+      user: req.user._id,
+      description,
+      fertilizers,
+      seeds,
+      season,
+      durationInMonths,
+      img,
+      durationPeriod,
+      pests,
+      avgProfit,
+    });
+
+    const createdCrop = await crop.save();
+    res.status(201).json(createdCrop);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: err.message });
+  }
 });
 
 // @desc    Update a crop
@@ -88,33 +99,32 @@ const createCrop = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updateCrop = asyncHandler(async (req, res) => {
   const {
-    title,
-    genre,
-    type,
-    status,
-    cover,
-    plot,
-    rank,
-    rating,
-    chapters,
-    date,
-    author,
+    name,
+    fertilizers,
+    seeds,
+    season,
+    description,
+    durationPeriod,
+    img,
+    durationInMonths,
+    pests,
+    avgProfit,
   } = req.body;
 
   const crop = await Crop.findById(req.params.id);
 
   if (crop) {
-    crop.title = title;
-    crop.genre = genre;
-    crop.type = type;
-    crop.status = status;
-    crop.cover = cover;
-    crop.plot = plot;
-    crop.rank = rank;
-    crop.rating = rating;
-    crop.date = date;
-    crop.chapters = chapters;
-    crop.author = author;
+    crop.name = name;
+    crop.fertilizers = fertilizers;
+    crop.seeds = seeds;
+    crop.season = season;
+    crop.img = img;
+    crop.season = season;
+    crop.durationInMonths = durationInMonths;
+    crop.description = description;
+    crop.durationPeriod = durationPeriod;
+    crop.pests = pests;
+    crop.avgProfit = avgProfit;
     const updatedCrop = await crop.save();
     res.json(updatedCrop);
   } else {
@@ -142,42 +152,39 @@ const deleteCrop = asyncHandler(async (req, res) => {
 // @route   POST /api/crops/:id/reviews
 // @access  Private
 const createCropReview = asyncHandler(async (req, res) => {
-  const { rating, comment } = req.body;
+  const { comment } = req.body;
 
   const crop = await Crop.findById(req.params.id);
 
   if (crop) {
-    const alreadyReviewed = crop.reviews.find(
-      (r) => r.user.toString() === req.user._id.toString()
-    );
+      // const alreadyReviewed = crop.reviews.find(
+      //     (r) => r.user.toString() === req.user._id.toString()
+      // );
 
-    if (alreadyReviewed) {
-      res.status(400);
-      throw new Error("Crop already reviewed");
-    }
+      // if (alreadyReviewed) {
+      //     res.status(400);
+      //     throw new Error("Crop already reviewed");
+      // }
 
-    const review = {
-      name: req.user.name,
-      rating: Number(rating),
-      comment,
-      user: req.user._id,
-    };
+      const review = {
+          name: req.user.name,
+          comment,
+          user: req.user._id,
+          createdAt: new Date().toISOString(), // Add createdAt field
+      };
 
-    crop.reviews.push(review);
+      crop.reviews.push(review);
 
-    crop.numReviews = crop.reviews.length;
-
-    crop.rating =
-      crop.reviews.reduce((acc, item) => item.rating + acc, 0) /
-      crop.reviews.length;
-
-    await crop.save();
-    res.status(201).json({ message: "Review added" });
+      await crop.save();
+      
+      // Return the new review
+      res.status(201).json(review);
   } else {
-    res.status(404);
-    throw new Error("Crop not found");
+      res.status(404);
+      throw new Error("Crop not found");
   }
 });
+
 
 // @desc    Get top rated crops
 // @route   GET /api/crops/top

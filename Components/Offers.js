@@ -5,10 +5,7 @@ const Offers = () => {
   return (
     <>
     <View style={styles.offersContainer}>
-<TextInput
-        style={styles.searchInput}
-        placeholder="Search products here"
-      />
+<Text style={styles.offerText}>"Empowering farmers with data-driven insights for smarter decisions and maximum yield."</Text>
     </View>
     <View style={styles.offersContainer}>
     

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet,Text, Image,TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { ADDRESS } from '../constants';
 const AllFertilizerScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +14,7 @@ const AllFertilizerScreen = ({ navigation }) => {
  
    const fetchingFertilizers = async () => {
      try {
-       const response = await fetch('http://192.168.1.7:5000/api/fertilizers');
+       const response = await fetch(`${ADDRESS}/api/fertilizers`);
        const responseData = await response.json();
        setData(responseData.fertilizers);
      } catch (error) {

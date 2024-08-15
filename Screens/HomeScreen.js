@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
         <Icons />
         <View>
         <View style={styles.hr} />
-        <Text style={styles.text}>Recommended Plans</Text>
+        <Text style={styles.text}>Top Plans</Text>
         </View>
         <Cards/>
         <View style={styles.buttonContainer}>
