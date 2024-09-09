@@ -4,25 +4,26 @@
     "slug": "farmiq",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Farm3.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Farm6.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00bf71"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/Farm6.png",
+        "resizeMode": "fit",
+        "backgroundColor": "#00bf71"
       },
       "package": "com.saimalk.farmiq"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/Farm6.png"
     },
     "extra": {
       "eas": {

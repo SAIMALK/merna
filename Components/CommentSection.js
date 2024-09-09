@@ -13,7 +13,7 @@ const CommentSection = ({ cropId }) => {
         const fetchComments = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://192.168.1.9:5000/api/crops/${cropId}`);
+                const response = await fetch(`https://farmiq-backend.vercel.app/api/crops/${cropId}`);
                 const data = await response.json();
                 if (data && Array.isArray(data.reviews)) {
                     setComments(data.reviews);
@@ -33,7 +33,7 @@ const CommentSection = ({ cropId }) => {
     const submitHandler = async () => {
         if (comment.trim()) {
             try {
-                const response = await fetch(`http://192.168.1.9:5000/api/crops/${cropId}/reviews`, {
+                const response = await fetch(`https://farmiq-backend.vercel.app/api/crops/${cropId}/reviews`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
